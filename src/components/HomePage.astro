@@ -1,0 +1,253 @@
+---
+import { Image } from 'astro:assets';
+
+import detailEn from '../assets/screens/en/detail.png';
+import statsEn from '../assets/screens/en/stats.png';
+import todayEn from '../assets/screens/en/today.png';
+import detailFr from '../assets/screens/fr/detail.png';
+import statsFr from '../assets/screens/fr/stats.png';
+import todayFr from '../assets/screens/fr/today.png';
+import { content } from '../data/content';
+import { isPlaceholder, release } from '../data/release';
+import { paths, type Locale } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = content[locale];
+const here = paths[locale];
+
+/* Screenshots of the app in the reader's own language. */
+const screens =
+  locale === 'fr'
+    ? { today: todayFr, stats: statsFr, detail: detailFr }
+    : { today: todayEn, stats: statsEn, detail: detailEn };
+
+/* Apple's badges are drawn 40px tall; these are their widths scaled to the 56px we render. */
+const badgeHeight = 56;
+const badgeWidth = Math.round((locale === 'fr' ? 126.50751 : 119.66407) * (badgeHeight / 40));
+
+const appStoreReady = !isPlaceholder(release.appStoreUrl);
+const apkReady = !isPlaceholder(release.apkUrl);
+
+const dots = ['rose', 'lilas', 'anis', 'ambre', 'bleu', 'menthe'];
+const [today, stats, detail] = t.home.screens.items;
+---
+
+<section id="download" class="wrap hero">
+  <div class="hero__text">
+    <div class="dots" aria-hidden="true">
+      {dots.map((c) => <span style={`background: var(--${c})`} />)}
+    </div>
+
+    <h1 class="hero__h1">{t.home.h1}</h1>
+    <p class="hero__lede">{t.home.lede}</p>
+
+    <div class="buttons">
+      <a
+        class:list={['tap', 'badge-link', { 'is-disabled': !appStoreReady }]}
+        href={appStoreReady ? release.appStoreUrl : undefined}>
+        <img
+          src={`/img/app-store-badge-${locale}.svg`}
+          alt={t.home.appStoreAlt}
+          width={badgeWidth}
+          height={badgeHeight}
+        />
+      </a>
+
+      <a
+        class:list={['btn-apk', { 'is-disabled': !apkReady }]}
+        href={apkReady ? release.apkUrl : undefined}
+        download>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 19h14"></path></svg
+        >
+        <span class="btn-apk__label">
+          <span class="btn-apk__kicker">{t.home.apkKicker}</span>
+          <span class="btn-apk__name">{t.home.apkLabel}</span>
+        </span>
+      </a>
+    </div>
+
+    <p class="hero__note">
+      {t.home.apkNote(release.version, release.size, release.minAndroidVersion)}{' '}
+      <a href="#android">{t.home.howToInstall}</a>
+    </p>
+  </div>
+
+  <div class="hero__art">
+    <Image
+      class="phone phone--back"
+      src={screens.stats}
+      alt=""
+      width={880}
+      format="webp"
+      loading="eager"
+    />
+    <Image
+      class="phone phone--front"
+      src={screens.today}
+      alt={t.home.heroImageAlt}
+      width={880}
+      format="webp"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+</section>
+
+<section class="band" aria-labelledby="why">
+  <div class="wrap section">
+    <h2 id="why" class="display h2 why__h2">{t.home.why.h2}</h2>
+
+    <div class="cards">
+      <div class="card">
+        <span class="card__icon card__icon--check" aria-hidden="true">
+          <span>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#F0B35A"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg
+            >
+          </span>
+        </span>
+        <h3>{t.home.why.cards[0].title}</h3>
+        <p>{t.home.why.cards[0].body}</p>
+      </div>
+
+      <div class="card">
+        <span class="card__icon" style="color: var(--bleu)" aria-hidden="true">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"><path d="M5 20V12M12 20V5M19 20v-5"></path></svg
+          >
+        </span>
+        <h3>{t.home.why.cards[1].title}</h3>
+        <p>{t.home.why.cards[1].body}</p>
+      </div>
+
+      <div class="card">
+        <span class="card__icon" style="color: var(--menthe)" aria-hidden="true">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><rect x="5" y="11" width="14" height="9" rx="2.5"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"
+            ></path></svg
+          >
+        </span>
+        <h3>{t.home.why.cards[2].title}</h3>
+        <p>{t.home.why.cards[2].body}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section" aria-labelledby="screens">
+  <h2 id="screens" class="display h2">{t.home.screens.h2}</h2>
+
+  <div class="figures">
+    <figure>
+      <Image class="phone" src={screens.today} alt={today.alt} width={880} format="webp" />
+      <figcaption><strong>{today.title}</strong><span>{today.caption}</span></figcaption>
+    </figure>
+    <figure>
+      <Image class="phone" src={screens.stats} alt={stats.alt} width={880} format="webp" />
+      <figcaption><strong>{stats.title}</strong><span>{stats.caption}</span></figcaption>
+    </figure>
+    <figure>
+      <Image class="phone" src={screens.detail} alt={detail.alt} width={880} format="webp" />
+      <figcaption><strong>{detail.title}</strong><span>{detail.caption}</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="wrap pledge" aria-labelledby="privacy-band">
+  <div class="pledge__inner">
+    <div class="pledge__text">
+      <h2 id="privacy-band" class="display">{t.home.privacyBand.h2}</h2>
+      <p>{t.home.privacyBand.body}</p>
+    </div>
+    <a class="btn-ghost" href={here.privacy}>
+      {t.home.privacyBand.cta}
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg
+      >
+    </a>
+  </div>
+</section>
+
+<section id="android" class="wrap android" aria-labelledby="android-title">
+  <div class="android__text">
+    <h2 id="android-title" class="display h2">{t.home.android.h2}</h2>
+    <p>{t.home.android.intro}</p>
+
+    <a
+      class:list={['btn-solid', { 'is-disabled': !apkReady }]}
+      href={apkReady ? release.apkUrl : undefined}
+      download>
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 19h14"></path></svg
+      >
+      {t.home.android.downloadLabel(release.size)}
+    </a>
+
+    <p class="checksum">{t.home.android.checksumLabel} {release.checksum}</p>
+  </div>
+
+  <ol class="steps">
+    {
+      t.home.android.steps.map((step) => (
+        <li>
+          <span class="steps__n" aria-hidden="true" />
+          <span>
+            <Fragment set:html={step.leadHtml} />
+            <br />
+            <span class="steps__detail">{step.detail}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+</section>

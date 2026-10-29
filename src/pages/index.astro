@@ -1,0 +1,12 @@
+---
+import HomePage from '../components/HomePage.astro';
+import { content } from '../data/content';
+import Base from '../layouts/Base.astro';
+
+const locale = 'en' as const;
+const t = content[locale];
+---
+
+<Base locale={locale} page="home" title={t.home.title} description={t.home.description}>
+  <HomePage locale={locale} />
+</Base>

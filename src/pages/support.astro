@@ -1,0 +1,12 @@
+---
+import SupportPage from '../components/SupportPage.astro';
+import { content } from '../data/content';
+import Base from '../layouts/Base.astro';
+
+const locale = 'en' as const;
+const t = content[locale];
+---
+
+<Base locale={locale} page="support" title={t.support.title} description={t.support.description}>
+  <SupportPage locale={locale} />
+</Base>

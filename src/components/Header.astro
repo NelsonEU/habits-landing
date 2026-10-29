@@ -1,0 +1,46 @@
+---
+import { content } from '../data/content';
+import { paths, type Locale, type Page } from '../data/site';
+import Mark from './Mark.astro';
+
+interface Props {
+  locale: Locale;
+  page: Page;
+}
+
+const { locale, page } = Astro.props;
+const t = content[locale];
+const here = paths[locale];
+const other: Locale = locale === 'en' ? 'fr' : 'en';
+
+/* On the landing page "Download" is an in-page jump; elsewhere it goes home first. */
+const downloadHref = page === 'home' ? '#download' : `${here.home}#download`;
+---
+
+<header class="wrap header">
+  <a class="brand" href={here.home}>
+    <Mark />
+    <span class="brand__name">Habits</span>
+  </a>
+
+  <nav class="nav" aria-label={t.nav.label}>
+    <a
+      class="tap nav__link"
+      href={here.support}
+      aria-current={page === 'support' ? 'page' : undefined}>{t.nav.support}</a
+    >
+    <a
+      class="tap nav__link"
+      href={here.privacy}
+      aria-current={page === 'privacy' ? 'page' : undefined}>{t.nav.privacy}</a
+    >
+    <a class="tap nav__cta" href={downloadHref}>{t.nav.download}</a>
+    <a
+      class="tap nav__lang"
+      href={paths[other][page]}
+      lang={other}
+      hreflang={other}
+      aria-label={content[other].languageName}>{t.switchToShort}</a
+    >
+  </nav>
+</header>

@@ -1,0 +1,16 @@
+---
+/* The app's mark: a ring with a crescent inside. Also the favicon (public/favicon.svg). */
+interface Props {
+  size?: number;
+}
+
+const { size = 32 } = Astro.props;
+---
+
+<svg width={size} height={size} viewBox="196 196 632 632" aria-hidden="true" focusable="false">
+  <path
+    fill-rule="evenodd"
+    d="M512 196a316 316 0 1 0 0 632a316 316 0 1 0 0-632ZM512 268a244 244 0 1 1 0 488a244 244 0 1 1 0-488Z"
+    fill="#F2EFE8"></path>
+  <path d="M539.9 324.1A190 190 0 1 1 344.8 602.4A190 190 0 0 0 539.9 324.1Z" fill="#F0B35A"></path>
+</svg>

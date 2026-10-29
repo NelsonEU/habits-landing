@@ -1,0 +1,32 @@
+---
+import { content } from '../data/content';
+import type { Locale } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = content[locale];
+---
+
+<div class="wrap wrap--narrow page page--privacy">
+  <div class="page__head">
+    <h1 class="page__h1">{t.privacy.h1}</h1>
+    <p class="page__updated">{t.privacy.updated}</p>
+  </div>
+
+  <div class="note">
+    <p class="note__title">{t.privacy.short.title}</p>
+    <p>{t.privacy.short.body}</p>
+  </div>
+
+  {
+    t.privacy.sections.map((section) => (
+      <section class="policy">
+        <h2>{section.h2}</h2>
+        <Fragment set:html={section.bodyHtml} />
+      </section>
+    ))
+  }
+</div>

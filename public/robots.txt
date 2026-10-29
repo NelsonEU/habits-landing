@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://habits.arn0.be/sitemap.xml

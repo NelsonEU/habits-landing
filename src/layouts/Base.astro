@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { content } from '../data/content';
+import { absolute, locales, paths, site, type Locale, type Page } from '../data/site';
+
+interface Props {
+  locale: Locale;
+  page: Page;
+  title: string;
+  description: string;
+}
+
+const { locale, page, title, description } = Astro.props;
+const t = content[locale];
+
+const canonical = absolute(paths[locale][page]);
+const ogLocale = locale === 'fr' ? 'fr_FR' : 'en_US';
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    {
+      locales.map((l) => (
+        <link rel="alternate" hreflang={l} href={absolute(paths[l][page])} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={absolute(paths.en[page])} />
+
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {/* TODO: add a 1200×630 social image, then set og:image and twitter:image to it. */}
+
+    <meta name="theme-color" content="#12141C" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link
+      rel="preload"
+      href="/fonts/figtree-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/bricolage-grotesque-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <script
+      is:inline
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon={`{"token": "${site.cloudflareBeaconToken}"}`}></script>
+  </head>
+
+  <body>
+    <a class="skip" href="#content">{t.skipToContent}</a>
+    <Header locale={locale} page={page} />
+    <main id="content">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+  </body>
+</html>

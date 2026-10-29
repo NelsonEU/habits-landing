@@ -1,0 +1,12 @@
+---
+import PrivacyPage from '../../components/PrivacyPage.astro';
+import { content } from '../../data/content';
+import Base from '../../layouts/Base.astro';
+
+const locale = 'fr' as const;
+const t = content[locale];
+---
+
+<Base locale={locale} page="privacy" title={t.privacy.title} description={t.privacy.description}>
+  <PrivacyPage locale={locale} />
+</Base>

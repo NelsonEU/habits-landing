@@ -1,0 +1,23 @@
+---
+import { content } from '../data/content';
+import { paths, site, type Locale } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = content[locale];
+const here = paths[locale];
+---
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <span>{t.footer.byline}</span>
+    <nav class="footer__nav" aria-label={t.nav.footerLabel}>
+      <a class="tap" href={here.support}>{t.nav.support}</a>
+      <a class="tap" href={here.privacy}>{t.nav.privacy}</a>
+      <a class="tap" href={`mailto:${site.email}`}>{site.email}</a>
+    </nav>
+  </div>
+</footer>
