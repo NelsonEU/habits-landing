@@ -35,11 +35,17 @@ break.
 
 ## Releasing a new version
 
-Everything that changes between releases is in `src/data/release.ts`: the App Store URL, the APK
-URL, the version, the size, the minimum Android version and the APK's SHA-256.
+Everything that changes between releases is in `src/data/release.ts`: the App Store URL, the
+version, the size, the minimum Android version and the APK's SHA-256.
 
-Each value starts as a `[PLACEHOLDER]`. While a URL is still a placeholder its button renders
-disabled rather than linking nowhere, so the site is safe to deploy before the app ships.
+The Android side ships from the app repo: pushing a `vX.Y.Z` tag runs its `release.yml`, which
+builds a signed APK and publishes it as a GitHub release with the size and SHA-256 in the notes.
+Here you bump `version` and paste those two values — the APK URL is derived from `version` and
+pins to that exact tag, so the link, the size and the checksum always describe the same file.
+
+A value left as a `[PLACEHOLDER]` still renders: its button is disabled rather than linking
+nowhere, so the site is safe to deploy before a platform ships. The App Store button is in that
+state until iOS is on the store.
 
 ## Structure
 

@@ -8,7 +8,7 @@ import detailFr from '../assets/screens/fr/detail.png';
 import statsFr from '../assets/screens/fr/stats.png';
 import todayFr from '../assets/screens/fr/today.png';
 import { content } from '../data/content';
-import { isPlaceholder, release } from '../data/release';
+import { apkUrl, isPlaceholder, release } from '../data/release';
 import { paths, type Locale } from '../data/site';
 
 interface Props {
@@ -30,7 +30,7 @@ const badgeHeight = 56;
 const badgeWidth = Math.round((locale === 'fr' ? 126.50751 : 119.66407) * (badgeHeight / 40));
 
 const appStoreReady = !isPlaceholder(release.appStoreUrl);
-const apkReady = !isPlaceholder(release.apkUrl);
+const apkReady = !isPlaceholder(apkUrl);
 
 const dots = ['rose', 'lilas', 'anis', 'ambre', 'bleu', 'menthe'];
 const [today, stats, detail] = t.home.screens.items;
@@ -59,7 +59,7 @@ const [today, stats, detail] = t.home.screens.items;
 
       <a
         class:list={['btn-apk', { 'is-disabled': !apkReady }]}
-        href={apkReady ? release.apkUrl : undefined}
+        href={apkReady ? apkUrl : undefined}
         download>
         <svg
           width="22"
@@ -217,7 +217,7 @@ const [today, stats, detail] = t.home.screens.items;
 
     <a
       class:list={['btn-solid', { 'is-disabled': !apkReady }]}
-      href={apkReady ? release.apkUrl : undefined}
+      href={apkReady ? apkUrl : undefined}
       download>
       <svg
         width="20"
