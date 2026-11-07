@@ -16,8 +16,6 @@ export const release = {
   version: '1.0.1',
   /** APK size in whole megabytes, as a bare number. */
   size: '61',
-  /** Minimum Android version the APK runs on. minSdkVersion 24 is Android 7.0. */
-  minAndroidVersion: '7.0',
   /** SHA-256 of the exact file `apkUrl` serves. */
   checksum: '1076fc9f3e270b1f29eaae55b009f0dd72f985bfefd181ee348572c11c71b479',
 } as const;

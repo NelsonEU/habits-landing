@@ -1,7 +1,7 @@
 # habits.arn0.be
 
 Source of [habits.arn0.be](https://habits.arn0.be), the website for **Habits**, a small iOS and
-Android app for ticking the habits you kept, every evening. The app itself lives in a separate repo.
+Android app for ticking the habits you kept, every day. The app itself lives in a separate repo.
 
 Built with [Astro](https://astro.build) as a static site: plain HTML and CSS, no client-side
 JavaScript at all.

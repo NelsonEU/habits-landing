@@ -33,15 +33,12 @@ export const fr: Content = {
     appStoreAlt: 'Télécharger dans l’App Store',
     apkKicker: 'Pour Android',
     apkLabel: 'Télécharger l’APK',
-    apkNote: (version: string, size: string, min: string) =>
-      `APK Android · version ${version} · ${size} Mo · Android ${min} ou plus récent.`,
-    howToInstall: 'Comment l’installer',
 
     heroImageAlt:
       'L’écran Aujourd’hui : trois habitudes cochées, chaque carte remplie de sa couleur, une encore ouverte.',
 
     why: {
-      h2: 'Un rituel du soir, pas un outil de productivité.',
+      h2: 'Un rituel quotidien, pas un outil de productivité.',
       cards: [
         {
           title: 'Coche, puis referme.',
@@ -113,7 +110,7 @@ export const fr: Content = {
   support: {
     title: 'Habits — Aide',
     description:
-      'Aide pour Habits, le suivi d’habitudes du soir : où sont tes données, importer une sauvegarde, les rappels, et l’installation sur Android.',
+      'Aide pour Habits, le suivi d’habitudes quotidien : où sont tes données, importer une sauvegarde, les rappels, et l’installation sur Android.',
     h1: 'Aide',
     lede: 'Une question, un bug, une idée ? Écris-moi. Je réponds en général sous quelques jours.',
     emailLabel: 'E-mail',
@@ -133,7 +130,7 @@ export const fr: Content = {
           '<p>Oui, depuis un export de Habits ou une sauvegarde Daygraph. Passe par <strong>Réglages › Importer des données</strong>, puis choisis de le fusionner avec tes données actuelles ou de les remplacer.</p>',
       },
       {
-        q: 'Je ne reçois pas le rappel du soir.',
+        q: 'Je ne reçois pas le rappel quotidien.',
         answerHtml:
           '<p>Vérifie que les notifications sont autorisées pour Habits dans les réglages de ton téléphone. Le rappel est aussi sauté les jours où tu as déjà coché quelque chose.</p>',
       },

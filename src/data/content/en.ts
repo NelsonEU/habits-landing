@@ -36,16 +36,12 @@ export const en = {
     appStoreAlt: 'Download on the App Store',
     apkKicker: 'For Android',
     apkLabel: 'Download APK',
-    /** The line under the two download buttons; `howToInstall` is the link at its end. */
-    apkNote: (version: string, size: string, min: string) =>
-      `Android APK · version ${version} · ${size} MB · Android ${min} or later.`,
-    howToInstall: 'How to install',
 
     heroImageAlt:
       'The Today screen: three habits ticked, each card filled with its colour, one still open.',
 
     why: {
-      h2: 'An evening ritual, not a productivity tool.',
+      h2: 'A daily ritual, not a productivity tool.',
       cards: [
         {
           title: 'Tap, then close.',
@@ -115,7 +111,7 @@ export const en = {
   support: {
     title: 'Habits — Support',
     description:
-      'Help with Habits, the evening habit tracker: where your data lives, importing a backup, reminders, and installing on Android.',
+      'Help with Habits, the daily habit tracker: where your data lives, importing a backup, reminders, and installing on Android.',
     h1: 'Support',
     lede: 'A question, a bug, an idea? Write to me. I usually reply within a few days.',
     emailLabel: 'Email',
@@ -135,7 +131,7 @@ export const en = {
           '<p>Yes, from a Habits export or a Daygraph backup. Use <strong>Settings › Import data</strong>, then choose whether to merge it with your current data or replace it.</p>',
       },
       {
-        q: 'I don’t get the evening reminder.',
+        q: 'I don’t get the daily reminder.',
         answerHtml:
           '<p>Check that notifications are allowed for Habits in your phone’s settings. The reminder is also skipped on days when you’ve already ticked something.</p>',
       },
