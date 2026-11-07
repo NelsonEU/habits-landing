@@ -11,7 +11,7 @@ const APP_REPO = 'https://github.com/NelsonEU/habits';
 
 export const release = {
   /** App Store listing, e.g. https://apps.apple.com/app/id0000000000 */
-  appStoreUrl: '[APP STORE URL]',
+  appStoreUrl: 'https://apps.apple.com/app/id6821026409',
   /** The APK's version — the `vX.Y.Z` tag that built it, and `version` in the app's package.json. */
   version: '1.0.1',
   /** APK size in whole megabytes, as a bare number. */
